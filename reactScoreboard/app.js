@@ -20,22 +20,18 @@ const Player = (props) => {
 class Counter extends React.Component {
   state = {
       playerScore: 0
-  };
+  }
 
   incrementScore = () => {
-    this.setState( prevState => {
-      return {
-      playerScore: prevstate.playerScore + 1
-    };
-    });
+    this.setState( prevState => ({
+      playerScore: prevState.playerScore + 1
+    }));
   }
 
   decrementScore = () => {
-    this.setState( prevState => {
-      return {
-      playerScore: prevstate.playerScore - 1
-    };
-    });
+    this.setState( prevState => ({
+      playerScore: prevState.playerScore - 1
+    }));
   }
 
   render() {
@@ -51,28 +47,24 @@ class Counter extends React.Component {
 
 class App extends React.Component {
   state = {
-    playerName: [
+    players: [
       {
         playerName: "John",
-        playerScore: 20,
         id: 1
       },
       
       {
         playerName: "Ann",
-        playerScore: 28,
         id: 2
       },
       
       {
         playerName: "Ashley",
-        playerScore: 42,
         id: 3
       },
       
       {
         playerName: "Paul",
-        playerScore: 35,
         id: 4
       },
     ]
@@ -81,7 +73,7 @@ class App extends React.Component {
   handleRemovePlayer = (id) => {
     this.setState ( prevState => {
       return {
-        playerName: prevState.playerName.filter(p => p.id !== id)
+        players: prevState.players.filter(p => p.id !== id)
       }; 
     });
   }
@@ -91,13 +83,13 @@ class App extends React.Component {
       <div className="scoreboard">
         <Header 
         title="scoreboard" 
-        totalPlayers={this.state.playerName.length} 
+        totalPlayers={this.state.players.length} 
         />
-        {this.state.playerName.map( player =>
+        {this.state.players.map( players =>
           <Player 
-            playerName={player.playerName}
-            id = {player.id}
-            key={player.id.toString()} 
+            playerName={players.playerName}
+            id = {players.id}
+            key={players.id.toString()} 
             removePlayer = {this.handleRemovePlayer}
             />
         )}
